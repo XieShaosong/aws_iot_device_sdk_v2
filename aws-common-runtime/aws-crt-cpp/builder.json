@@ -1,0 +1,38 @@
+{
+    "name": "aws-crt-cpp",
+    "!cmake_args": [
+        "-DBUILD_DEPS=ON",
+        "-DPERFORM_HEADER_CHECK=OFF",
+        "-DS2N_NO_PQ_ASM=ON"
+    ],
+    "targets": {
+        "linux" : {
+            "imports": [
+                "s2n"
+            ]
+        },
+        "android": {
+            "imports": [
+                "s2n"
+            ]
+        }
+    },
+    "search_dirs": ["aws-common-runtime"],
+    "hosts": {
+        "manylinux": {
+            "architectures": {
+                "x86": {
+                    "!yum_compiler_packages": []
+                }
+            }
+        }
+    },
+    "test_steps": [
+        "test",
+        [
+            "{python}",
+            "{project_dir}/aws-common-runtime/aws-c-http/integration-testing/http_client_test.py",
+            "{install_dir}/bin/elasticurl_cpp{exe}"
+        ]
+    ]
+}
