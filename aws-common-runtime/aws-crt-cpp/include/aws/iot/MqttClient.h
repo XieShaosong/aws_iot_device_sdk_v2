@@ -237,7 +237,9 @@ namespace Aws
         class AWS_CRT_CPP_API MqttClient final
         {
           public:
+            MqttClient() {}
             MqttClient(Crt::Io::ClientBootstrap &bootstrap, Crt::Allocator *allocator = Crt::g_allocator) noexcept;
+            MqttClient &operator=(MqttClient &&client) noexcept;
 
             std::shared_ptr<Crt::Mqtt::MqttConnection> NewConnection(const MqttClientConnectionConfig &config) noexcept;
             /**

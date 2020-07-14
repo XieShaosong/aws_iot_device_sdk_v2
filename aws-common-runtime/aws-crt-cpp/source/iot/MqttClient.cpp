@@ -314,6 +314,13 @@ namespace Aws
             }
         }
 
+        MqttClient &MqttClient::operator=(MqttClient &&client) noexcept
+        {
+            m_client = std::move(client.m_client);
+            m_lastError = client.m_lastError;
+            return *this;
+        }
+
         std::shared_ptr<Crt::Mqtt::MqttConnection> MqttClient::NewConnection(
             const MqttClientConnectionConfig &config) noexcept
         {
